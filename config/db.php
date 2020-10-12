@@ -6,7 +6,7 @@ function DBCON(){
 	$username = 'root';
 	$password = '';
 	$server = 'localhost';
-	$dbname = 'courier';
+	$dbname = 'ecom';
 	try {
 
 		$db = new PDO('mysql:host='.$server.';dbname='.$dbname,$username,$password);

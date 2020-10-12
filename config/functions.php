@@ -17,24 +17,6 @@ function alert($msg){
 }
 
 
-function generate_code(){
-	return mt_rand(100000,999999);
-}
-
-function email2facode($data,$id){
-
-	$data["code"] = generate_code();
-	$data["expite_date"] = date("Y-m-d h:i:sa", strtotime('+5 minutes'));
-
-	$sql = "UPDATE `users` SET `2fa`=:data WHERE `id` = '".$id."'";
-	$pdo_statement = DBCON()->prepare($sql);		
-	$result = $pdo_statement->execute(array(':data' => json_encode($data)));
-	if (!empty($result) ){
-		  return 1;
-	}else{
-		return 0;
-	}	
-}
 
 
 function userinfofetch(){
