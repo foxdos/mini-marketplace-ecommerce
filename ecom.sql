@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 13, 2020 at 05:28 PM
+-- Generation Time: Oct 15, 2020 at 07:06 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.1.26
 
@@ -32,10 +32,17 @@ DROP TABLE IF EXISTS `category`;
 CREATE TABLE IF NOT EXISTS `category` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `cat_name` varchar(255) DEFAULT NULL,
-  `cat_image` text NOT NULL,
+  `cat_image` text,
   `sts` int(3) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`id`, `cat_name`, `cat_image`, `sts`) VALUES
+(1, 'Electronic', 'cateimage/1.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -55,7 +62,14 @@ CREATE TABLE IF NOT EXISTS `products` (
   `prod_code` varchar(150) DEFAULT NULL,
   `sts` int(3) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `title`, `description`, `sell_price`, `unit_price`, `cat`, `sub_cat`, `prod_code`, `sts`) VALUES
+(1, 'Apple TV', 'Apple TV USA', 200, 150, 1, 1, 'ECOMTV001', 1);
 
 -- --------------------------------------------------------
 
@@ -67,9 +81,18 @@ DROP TABLE IF EXISTS `sub_category`;
 CREATE TABLE IF NOT EXISTS `sub_category` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `cat_name` varchar(255) DEFAULT NULL,
+  `cat_id` int(11) NOT NULL,
   `sts` int(3) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `sub_category`
+--
+
+INSERT INTO `sub_category` (`id`, `cat_name`, `cat_id`, `sts`) VALUES
+(1, 'TV', 1, 1),
+(2, 'Smart TV', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -80,11 +103,12 @@ CREATE TABLE IF NOT EXISTS `sub_category` (
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `fname` varchar(255) DEFAULT NULL,
+  `lname` varchar(255) DEFAULT NULL,
   `email` varchar(225) NOT NULL,
   `password` varchar(255) NOT NULL,
   `mobile` varchar(11) DEFAULT NULL,
   `role` int(3) NOT NULL DEFAULT '0',
-  `information` text,
   `sts` int(3) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
@@ -93,9 +117,9 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `email`, `password`, `mobile`, `role`, `information`, `sts`) VALUES
-(1, 'skb@mail.com', '202cb962ac59075b964b07152d234b70', '01781545752', 0, 'fname:shakib,lname:nabi', 1),
-(2, 'skbdevbd@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', NULL, 1, NULL, 0);
+INSERT INTO `users` (`id`, `fname`, `lname`, `email`, `password`, `mobile`, `role`, `sts`) VALUES
+(1, 'Abdulah', 'Akib', 'skb@mail.com', '202cb962ac59075b964b07152d234b70', '01781545752', 0, 1),
+(2, 'Shakib', 'Nabi', 'skbdevbd@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', NULL, 1, 0);
 
 -- --------------------------------------------------------
 

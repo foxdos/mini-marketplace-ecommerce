@@ -1,4 +1,13 @@
-<?php include 'header.php'; ?>
+<?php include 'header.php'; 
+
+if (isset($_POST["cat_name"])) {
+    create_category();
+}
+if (isset($_GET["del"])) {
+    delete_category($_GET["del"]);
+}
+
+?>
         <div class="page-body">
 
             <!-- Container-fluid starts-->
@@ -26,22 +35,19 @@
                                 <h5>Products Category</h5>
                             </div>
                             <div class="card-body">
-                                <form class="needs-validation">
+                                <form class="needs-validation" method="post">
                                     <div class="form">
                                         <div class="form-group">
                                             <label for="validationCustom01" class="mb-1">Category Name :</label>
-                                            <input class="form-control" id="validationCustom01" type="text">
-                                        </div>
-                                        <div class="form-group mb-0">
-                                            <label for="validationCustom02" class="mb-1">Category Image :</label>
-                                            <input class="form-control" id="validationCustom02" type="file">
+                                            <input class="form-control" name="cat_name" type="text">
                                         </div>
                                     </div>
-                                </form>
+                                
                                 <br>
                                 <div class="btn-popup pull-right">
-                                    <button type="button" class="btn btn-sm btn-primary" >Add Category</button>
+                                    <button type="submit" class="btn btn-sm btn-primary" >Add Category</button>
                                 </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -60,22 +66,12 @@
                                     <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Image</th>
                                         <th>Category Name</th>
-                                        <th>Total Sub Category</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>
-                                            <img src="../assets/images/electronics/product/25.jpg" alt="" class="img-fluid img-30 mr-2 blur-up lazyloaded">
-                                        </td>
-                                        <td><span class="badge badge-secondary">Electronic</span></td>
-                                        <td><span class="badge badge-success">5</span></td>
-                                        <td>Delete</td>
-                                    </tr>
+                                    <?php category_info(); ?>
                                     </tbody>
                                 </table>
                             </div>

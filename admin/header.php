@@ -1,3 +1,16 @@
+<?php 
+require_once '../config/init.php';
+$DB=DBCON();
+
+if (!isset($_SESSION['adminislogg'])) {
+    if ($_SESSION['adminislogg'] == false) {
+        redirect('login.php');
+    }
+   
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -94,12 +107,12 @@
                     <li><a class="sidebar-header" href="#"><i data-feather="box"></i> <span>Products</span><i class="fa fa-angle-right pull-right"></i></a>
                         <ul class="sidebar-submenu">
                             <li>
-                                <a href="products.php"><i class="fa fa-circle"></i>
+                                <a href="products.php?new=true"><i class="fa fa-circle"></i>
                                     <span>New Products</span> 
                                 </a>
                             </li>
                             <li>
-                                <a href="products.php"><i class="fa fa-circle"></i>
+                                <a href="products.php?current=true"><i class="fa fa-circle"></i>
                                     <span>Current Products</span>
                                 </a>
                             </li>
@@ -112,11 +125,11 @@
                                     <span>Categories</span> 
                                 </a>
                             </li>
-                            <li>
+                            <!-- <li>
                                 <a href="category-sub.php"><i class="fa fa-circle"></i>
                                     <span>Sub Categories</span>
                                 </a>
-                            </li>
+                            </li> -->
                         </ul>
                     </li>
                     <li><a class="sidebar-header" href="#"><i data-feather="dollar-sign"></i><span>Sales</span><i class="fa fa-angle-right pull-right"></i></a>

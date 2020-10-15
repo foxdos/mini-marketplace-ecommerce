@@ -1,4 +1,14 @@
-<?php include 'header.php'; ?>
+<?php 
+include 'header.php'; 
+if (isset($_GET['can'])) {
+    cancel_product($_GET['can']);
+}else if(isset($_GET['act'])){
+    active_product($_GET['act']);
+}
+if (!(isset($_GET["new"]) || isset($_GET["current"]) || isset($_GET["can"]) || isset($_GET["act"]))) {
+    die();
+}
+?>
 
         <div class="page-body">
 
@@ -28,45 +38,15 @@
             <!-- Container-fluid starts-->
             <div class="container-fluid">
                 <div class="row products-admin ratio_asos">
-                    <div class="col-xl-3 col-sm-6">
-                        <div class="card">
-                            <div class="card-body product-box">
-                                <div class="img-wrapper">
-                                    <div class="front">
-                                        <a href="#"><img src="../assets/images/pro3/34.jpg" class="img-fluid blur-up lazyload bg-img" alt=""></a>
-                                        <div class="product-hover">
-                                            <ul>
-                                                <li>
-                                                    <button class="btn" type="button" data-original-title="" title=""><i class="ti-pencil-alt"></i></button>
-                                                </li>
-                                                <li>
-                                                    <button class="btn" type="button" data-toggle="modal" data-target="#exampleModalCenter" data-original-title="" title=""><i class="ti-trash"></i></button>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="product-detail">
-                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
-                                    <a href="#">
-                                        <h6>Slim Fit Cotton Shirt</h6>
-                                    </a>
-                                    <h4>$500.00 <del>$600.00</del></h4>
-                                    <br>
-                                        <div class="row">
-                                            <div class="col-xl-6 col-sm-6">
-                                                <a href="#" class="btn btn-xs btn-info">Approve</a>
-                                            </div>
-                                            <div class="col-xl-6 col-sm-6">
-                                                <a href="#" class="btn btn-xs btn-warning">Cancel</a>
-                                            </div>
-                                        </div>
-                                        
-                                    
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
+                    <?php 
+                    if (isset($_GET["new"])) {
+                        admin_new_product();
+                    }else if (isset($_GET["current"])) {
+                        admin_current_product();
+                    }
+                     ?>
+
 
                 </div>
             </div>
