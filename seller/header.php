@@ -59,13 +59,13 @@
                         <div class="media align-items-center"><img class="align-self-center pull-right img-50 rounded-circle blur-up lazyloaded" src="assets/images/dashboard/man.png" alt="header-user">
                             <div class="dotted-animation"><span class="animate-circle"></span><span class="main-circle"></span></div>
                         </div>
-                        <ul class="profile-dropdown onhover-show-div p-20 profile-dropdown-hover">
+<!--                         <ul class="profile-dropdown onhover-show-div p-20 profile-dropdown-hover">
                             <li><a href="#"><i data-feather="user"></i>Edit Profile</a></li>
                             <li><a href="#"><i data-feather="mail"></i>Inbox</a></li>
                             <li><a href="#"><i data-feather="lock"></i>Lock Screen</a></li>
                             <li><a href="#"><i data-feather="settings"></i>Settings</a></li>
                             <li><a href="#"><i data-feather="log-out"></i>Logout</a></li>
-                        </ul>
+                        </ul> -->
                     </li>
                 </ul>
                 <div class="d-lg-none mobile-toggle pull-right"><i data-feather="more-horizontal"></i></div>
@@ -94,7 +94,7 @@
                     <li><a class="sidebar-header" href="#"><i data-feather="box"></i> <span>Products</span><i class="fa fa-angle-right pull-right"></i></a>
                         <ul class="sidebar-submenu">
                             <li>
-                                <a href="products.php"><i class="fa fa-circle"></i>
+                                <a href="add-product.php"><i class="fa fa-circle"></i>
                                     <span>New Products</span> 
                                 </a>
                             </li>
@@ -105,20 +105,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li><a class="sidebar-header" href="#"><i data-feather="box"></i> <span>Category</span><i class="fa fa-angle-right pull-right"></i></a>
-                        <ul class="sidebar-submenu">
-                            <li>
-                                <a href="category.php"><i class="fa fa-circle"></i>
-                                    <span>Categories</span> 
-                                </a>
-                            </li>
-                            <li>
-                                <a href="category-sub.php"><i class="fa fa-circle"></i>
-                                    <span>Sub Categories</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+
                     <li><a class="sidebar-header" href="#"><i data-feather="dollar-sign"></i><span>Sales</span><i class="fa fa-angle-right pull-right"></i></a>
                         <ul class="sidebar-submenu">
                             <li><a href="order.php"><i class="fa fa-circle"></i>Orders</a></li>

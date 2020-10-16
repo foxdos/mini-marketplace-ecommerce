@@ -135,11 +135,82 @@ function user_list(){
 		<tr>
 			<td><?= $k['id']; ?></td>
 			<td><?= $k['fname']; ?></td>
-			<td><?= $k['fname']; ?></td>
+			<td><?= $k['lname']; ?></td>
 			<td><?= $k['email']; ?></td>
 			<td><?= $k['mobile']; ?></td>
 		</tr>
 <?php
 	}
+}
+
+function create_users(){
+	$stmt = DBCON()->prepare(
+		"INSERT INTO `users`(`fname`, `lname`, `email`, `password`, `mobile`, `role`) 
+		VALUES (:fname, :lname, :email, :pass, :mob, :role)");
+	$res = $stmt->execute(array(
+		':fname' => $_POST["fname"],
+		':lname' => $_POST["lname"],
+		':email' => $_POST["email"],
+		':pass' => md5($_POST["password"]),
+		':mob' => $_POST["mobile"],
+		':role' => '1'
+		));
+	redirect('user-list.php');
+
+}
+
+function vendor_list(){
+	$stmt = DBCON()->prepare("SELECT * FROM `vendors`");
+	$stmt->execute();
+	$data = $stmt->fetchAll();
+	foreach ($data as $k) {?>
+		<tr>
+			<td><?= $k['id']; ?></td>
+			<td><?= $k['shop_name']; ?></td>
+			<td><?= $k['shop_address']; ?></td>
+			<td><?= $k['uid']; ?></td>
+		</tr>
+<?php
+	}
+}
+
+function create_vendor(){
+	$stmt = DBCON()->prepare(
+		"INSERT INTO `users`(`fname`, `lname`, `email`, `password`, `mobile`, `role`) 
+		VALUES (:fname, :lname, :email, :pass, :mob, :role)");
+	$res = $stmt->execute(array(
+		':fname' => $_POST["fname"],
+		':lname' => $_POST["lname"],
+		':email' => $_POST["email"],
+		':pass' => md5($_POST["password"]),
+		':mob' => $_POST["mobile"],
+		':role' => '2'
+		));
+	if (!empty($res)) {
+		$stmt = DBCON()->prepare("SELECT * FROM `users` WHERE `email` = '".$_POST["email"]."'");
+		$stmt->execute();
+		$data = $stmt->fetch(PDO::FETCH_ASSOC);
+		if (isset($data)) {
+			alert($data["id"]);
+			$stmt = DBCON()->prepare("INSERT INTO `vendors`(`shop_name`, `shop_address`, `uid`) VALUES (:sname, :saddress, :uid)");
+			$res = $stmt->execute(array(
+				':sname' => $_POST["sname"],
+				':saddress' => $_POST["saddress"],
+				':uid' => $data["id"]
+				));
+
+			redirect('list-vendor.php');
+		}else{
+			alert("data error");
+		}
+	}else{
+		alert("insert error");
+	}
+
+	
+	
+
+	
+
 }
 ?>
