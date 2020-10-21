@@ -5,8 +5,7 @@ $DB=DBCON();
 if (!isset($_SESSION['adminislogg'])) {
     if ($_SESSION['adminislogg'] == false) {
         redirect('login.php');
-    }
-   
+    }   
 }
 
 ?>

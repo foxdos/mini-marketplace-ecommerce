@@ -35,11 +35,15 @@ if (isset($_GET["del"])) {
                                 <h5>Products Category</h5>
                             </div>
                             <div class="card-body">
-                                <form class="needs-validation" method="post">
+                                <form class="needs-validation" method="post" enctype="multipart/form-data">
                                     <div class="form">
                                         <div class="form-group">
                                             <label for="validationCustom01" class="mb-1">Category Name :</label>
                                             <input class="form-control" name="cat_name" type="text">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="validationCustom01" class="mb-1">Category image :</label>
+                                            <input class="form-control" name="cat_image" type="file">
                                         </div>
                                     </div>
                                 

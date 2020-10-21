@@ -1,3 +1,13 @@
+<?php 
+require_once '../config/init.php';
+$DB=DBCON();
+
+if (!isset($_SESSION['sellislogg'])) {
+    if ($_SESSION['sellislogg'] == false) {
+        redirect('login.php');
+    }   
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 

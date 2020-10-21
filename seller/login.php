@@ -15,6 +15,7 @@ if (isset($_POST['login'])) {
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     if ($password == $result['password']) {
         $_SESSION['email'] = $email;
+        $_SESSION['sid'] = $result['id'];
         $_SESSION['sellislogg'] = true;
         alert("Login Successfully");
         redirect('index.php');

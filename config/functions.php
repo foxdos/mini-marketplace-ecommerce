@@ -100,9 +100,14 @@ function active_product($id){
 	redirect('products.php?current=true');
 }
 function create_category(){
-	$stmt = DBCON()->prepare("INSERT INTO `category`(`cat_name`) VALUES ('".$_POST["cat_name"]."')");
-	$res = $stmt->execute();
-	redirect('category.php');
+	$image = $_FILES['cat_image']['name'];
+	$target = "../assets/category/".$_POST["cat_name"].".png";
+	if (move_uploaded_file($_FILES['cat_image']['tmp_name'], $target)) {
+
+		$stmt = DBCON()->prepare("INSERT INTO `category`(`cat_name`, cat_image) VALUES ('".$_POST["cat_name"]."', '".$_POST["cat_name"]."')");
+		$res = $stmt->execute();
+		redirect('category.php');
+	}
 
 }
 function category_info()
@@ -206,11 +211,73 @@ function create_vendor(){
 	}else{
 		alert("insert error");
 	}
-
-	
-	
-
-	
-
 }
+function create_product(){
+	$image = $_FILES['image']['name'];
+	$target = "../assets/products/".$_POST["procode"].".png";
+	if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
+		$stmt = DBCON()->prepare(
+		"INSERT INTO `products`(`title`, `description`, `sell_price`, `unit_price`, `cat`, `prod_code`, `uid`, `img`) 
+		VALUES (:title, :description, :sell_price, :unit_price, :cat, :prod_code, :uid, :img)");
+		$res = $stmt->execute(array(
+			':title' 		=> $_POST["title"],
+			':description' 	=> $_POST["description"],
+			':sell_price' 	=> $_POST["sprice"],
+			':unit_price' 	=> $_POST["uprice"],
+			':cat' 			=> $_POST["category"],
+			':prod_code' 	=> $_POST["procode"],
+			':uid' 			=> $_SESSION['sid'],
+			':img' 			=> $_POST["procode"]
+			));
+		// redirect('products.php');
+  		
+  	}else{
+  		alert("Failed to upload image");
+  	}	
+}
+
+function category_option(){
+	$stmt = DBCON()->prepare("SELECT * FROM `category`");
+	$stmt->execute();
+	$data = $stmt->fetchAll();
+	foreach ($data as $k) {
+		echo '<option value="'.$k["id"].'">'.$k["cat_name"].'</option>';
+		
+	}
+}
+
+function seller_product()
+{
+	$stmt = DBCON()->prepare("SELECT * FROM `products` WHERE `sts` = 1 AND `uid` = '".$_SESSION['sid']."'");
+	$stmt->execute();
+	$data = $stmt->fetchAll();
+	foreach ($data as $k) { ?>
+
+		<div class="col-xl-3 col-sm-6">
+                        <div class="card">
+                            <div class="card-body product-box">
+                                <div class="img-wrapper">
+                                    <div class="front">
+                                        <a href="#"><img src="../assets/products/<?= $k["img"]; ?>.png" class="img-fluid blur-up lazyload bg-img" alt=""></a>
+                                    </div>
+                                </div>
+                                <div class="product-detail">
+                                    <a href="#">
+                                        <h6><?= $k["title"]; ?></h6>
+                                    </a>
+                                    <h4><?= $k["sell_price"]; ?> <del><?= $k["unit_price"]; ?></del></h4>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-xl-6 col-sm-6">
+                                            <a href="products.php?can=<?= $k["id"]; ?>" class="btn btn-xs btn-warning">Cancel</a>
+                                        </div>
+                                    </div>                                      
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+<?php	}
+}
+
 ?>
