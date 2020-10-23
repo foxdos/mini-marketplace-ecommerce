@@ -8,7 +8,7 @@ function new_product()
 		<div class="product-plr-1">
 			<div class="single-product-wrap">
                 <div class="product-img product-img-zoom mb-15">
-                    <a href="product-details.php">
+                    <a href="product.php?id=<?= $k["id"]; ?>">
                         <img src="assets/products/<?= $k["img"]; ?>.png" alt="">
                     </a>
                     <!-- <span class="pro-badge left bg-red">-40%</span> -->
@@ -20,9 +20,9 @@ function new_product()
                 </div>
                 <div class="product-content-wrap-3">
                     <div class="product-content-categories">
-                        <a class="purple" href="shop.php?cat=<?= $k["cat_name"]; ?>"><?= $k["cat_name"]; ?></a>
+                        <a class="purple" href="shop.php?cat=<?= $k["id"]; ?>"><?= $k["cat_name"]; ?></a>
                     </div>
-                    <h3><a class="purple" href="product-details.php?id=<?= $k["id"]; ?>"><?= $k["title"]; ?></a></h3>
+                    <h3><a class="purple" href="product.php?id=<?= $k["id"]; ?>"><?= $k["title"]; ?></a></h3>
                     <div class="product-price-4">
                         <span class="new-price">৳ <?= $k["sell_price"]; ?> </span>
                         <span class="old-price">৳ <?= $k["unit_price"]; ?> </span>
@@ -30,9 +30,9 @@ function new_product()
                 </div>
                 <div class="product-content-wrap-3 product-content-position-2">
                     <div class="product-content-categories">
-                        <a class="purple" href="shop.php?cat=<?= $k["cat_name"]; ?>"><?= $k["cat_name"]; ?></a>
+                        <a class="purple" href="shop.php?cat=<?= $k["id"]; ?>"><?= $k["cat_name"]; ?></a>
                     </div>
-                    <h3><a class="purple" href="product-details.php?id=<?= $k["id"]; ?>"><?= $k["title"]; ?></a></h3>
+                    <h3><a class="purple" href="product.php?id=<?= $k["id"]; ?>"><?= $k["title"]; ?></a></h3>
                     <div class="product-price-4">
                         <span class="new-price">৳ <?= $k["sell_price"]; ?> </span>
                         <span class="old-price">৳ <?= $k["unit_price"]; ?></span>
@@ -78,7 +78,7 @@ function show_shop()
         <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
             <div class="single-product-wrap mb-35">
                 <div class="product-img product-img-zoom mb-15">
-                    <a href="product-details.html">
+                    <a href="product.php?id=<?= $k["id"]; ?>">
                         <img src="assets/products/<?= $k["img"]; ?>.png" alt="">
                     </a>
                 </div>
@@ -131,18 +131,18 @@ function show_category_base_product()
                                     <div class="product-plr-1">
                                         <div class="single-product-wrap">
                                             <div class="product-img product-img-zoom mb-15">
-                                                <a href="product-details.php">
+                                                <a href="product.php?id=<?= $p["id"]; ?>">
                                                     <img src="assets/products/<?= $p["img"]; ?>.png" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-content-wrap-2 text-center">
-                                                <h3><a href="product-details.php?id=<?= $p["id"]; ?>"><?= $p["title"]; ?></a></h3>
+                                                <h3><a href="product.php?id=<?= $p["id"]; ?>"><?= $p["title"]; ?></a></h3>
                                                 <div class="product-price-2">
                                                     <span>৳ <?= $p["sell_price"]; ?></span>
                                                 </div>
                                             </div>
                                             <div class="product-content-wrap-2 product-content-wrap-2-modify product-content-position text-center">
-                                                <h3><a href="product-details.php?id=<?= $p["id"]; ?>"><?= $p["title"]; ?></a></h3>
+                                                <h3><a href="product.php?id=<?= $p["id"]; ?>"><?= $p["title"]; ?></a></h3>
                                                 <div class="product-price-2">
                                                     <span>৳ <?= $p["sell_price"]; ?></span>
                                                 </div>
@@ -162,6 +162,88 @@ function show_category_base_product()
                 </div>
             </div>
         </div>
+
+<?php   }
+}
+
+function show_shop_cat_menu()
+{
+    $stmt = DBCON()->prepare("SELECT * FROM category WHERE sts = '1'");
+    $stmt->execute();
+    $data = $stmt->fetchAll();
+    foreach ($data as $k) { ?>
+
+        <li><a href="shop.php?cat=<?= $k["id"]; ?>"><?= $k["cat_name"]; ?></a></li>
+
+<?php   }
+}
+
+function show_shopBycat($id)
+{
+    $stmt = DBCON()->prepare("SELECT * FROM products WHERE sts = '1' AND cat = '".$id."' ");
+    $stmt->execute();
+    $data = $stmt->fetchAll();
+    foreach ($data as $k) { ?>
+        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
+            <div class="single-product-wrap mb-35">
+                <div class="product-img product-img-zoom mb-15">
+                    <a href="product.php?id=<?= $k["id"]; ?>">
+                        <img src="assets/products/<?= $k["img"]; ?>.png" alt="">
+                    </a>
+                </div>
+                <div class="product-content-wrap-2 text-center">
+                    <h3><a href="product.php?id=<?= $k["id"]; ?>"><?= $k["title"]; ?></a></h3>
+                    <div class="product-price-2">
+                        <span>৳ <?= $k["sell_price"]; ?></span>
+                    </div>
+                </div>
+                <div class="product-content-wrap-2 product-content-position text-center">
+                    <h3><a href="product.php?id=<?= $k["id"]; ?>"><?= $k["title"]; ?></a></h3>
+                    <div class="product-price-2">
+                        <span>৳ <?= $k["sell_price"]; ?></span>
+                    </div>
+                    <div class="pro-add-to-cart">
+                        <button title="Add to Cart">Add To Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+<?php   }
+}
+
+function show_shopBysearch($id)
+{
+    $stmt = DBCON()->prepare("SELECT * FROM products WHERE sts = '1' AND title LIKE '".$id."' ");
+    $stmt->execute();
+    $data = $stmt->fetchAll();
+    foreach ($data as $k) { ?>
+        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
+            <div class="single-product-wrap mb-35">
+                <div class="product-img product-img-zoom mb-15">
+                    <a href="product.php?id=<?= $k["id"]; ?>">
+                        <img src="assets/products/<?= $k["img"]; ?>.png" alt="">
+                    </a>
+                </div>
+                <div class="product-content-wrap-2 text-center">
+                    <h3><a href="product.php?id=<?= $k["id"]; ?>"><?= $k["title"]; ?></a></h3>
+                    <div class="product-price-2">
+                        <span>৳ <?= $k["sell_price"]; ?></span>
+                    </div>
+                </div>
+                <div class="product-content-wrap-2 product-content-position text-center">
+                    <h3><a href="product.php?id=<?= $k["id"]; ?>"><?= $k["title"]; ?></a></h3>
+                    <div class="product-price-2">
+                        <span>৳ <?= $k["sell_price"]; ?></span>
+                    </div>
+                    <div class="pro-add-to-cart">
+                        <button title="Add to Cart">Add To Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
 <?php   }
 }

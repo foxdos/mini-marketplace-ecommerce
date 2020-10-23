@@ -1,12 +1,16 @@
-<?php include 'header.php'; ?>
-        <!-- mini cart start -->
+<?php
 
+include 'header.php'; 
+
+
+
+?>
         <div class="breadcrumb-area bg-gray">
             <div class="container">
                 <div class="breadcrumb-content text-center">
                     <ul>
                         <li>
-                            <a href="index.html">Home</a>
+                            <a href="index.php">Home</a>
                         </li>
                         <li class="active">Shop</li>
                     </ul>
@@ -22,7 +26,15 @@
                                 <div id="shop-1" class="tab-pane active">
                                     <div class="row">
 
-                                        <?php show_shop(); ?>
+                                        <?php
+                                        if (isset($_GET["cat"])) {
+                                            show_shopBycat($_GET["cat"]);
+                                        }if (isset($_GET["search"])) {
+                                            show_shopBysearch($_GET["search"]);
+                                        }else{
+                                            show_shop();
+                                        }
+                                        ?>
                                     </div>
                                 </div>                                        
                             </div>
