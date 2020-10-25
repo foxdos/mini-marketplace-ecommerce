@@ -78,7 +78,7 @@ require_once 'config/init.php';
                                         <a href="login-register.php"><i class="icon-user"></i></a>
                                     </div>
                                     <div class="same-style-2 same-style-2-font-inc header-cart">
-                                        <a class="cart-active" href="#">
+                                        <a href="cart.php">
                                             <i class="icon-basket-loaded"></i><span class="pro-count purple">02</span>
                                             <span class="cart-amount">$2,435.30</span>
                                         </a>
@@ -143,7 +143,7 @@ require_once 'config/init.php';
                                     <a href="wishlist.php"><i class="icon-heart"></i><span class="pro-count purple">03</span></a>
                                 </div>
                                 <div class="same-style-2 same-style-2-font-inc header-cart">
-                                    <a class="cart-active" href="#">
+                                    <a class="cart-active" href="checkout.php">
                                         <i class="icon-basket-loaded"></i><span class="pro-count purple">02</span>
                                     </a>
                                 </div>
@@ -156,46 +156,3 @@ require_once 'config/init.php';
                 </div>
             </div>
         </header>
-        <!-- mini cart start -->
-        <div class="sidebar-cart-active">
-            <div class="sidebar-cart-all">
-                <a class="cart-close" href="#"><i class="icon_close"></i></a>
-                <div class="cart-content">
-                    <h3>Shopping Cart</h3>
-                    <ul>
-                        <li class="single-product-cart">
-                            <div class="cart-img">
-                                <a href="#"><img src="assets/images/cart/cart-1.jpg" alt=""></a>
-                            </div>
-                            <div class="cart-title">
-                                <h4><a href="#">Simple Black T-Shirt</a></h4>
-                                <span> 1 × $49.00	</span>
-                            </div>
-                            <div class="cart-delete">
-                                <a href="#">×</a>
-                            </div>
-                        </li>
-                        <li class="single-product-cart">
-                            <div class="cart-img">
-                                <a href="#"><img src="assets/images/cart/cart-2.jpg" alt=""></a>
-                            </div>
-                            <div class="cart-title">
-                                <h4><a href="#">Norda Backpack</a></h4>
-                                <span> 1 × $49.00	</span>
-                            </div>
-                            <div class="cart-delete">
-                                <a href="#">×</a>
-                            </div>
-                        </li>
-                    </ul>
-                    <div class="cart-total">
-                        <h4>Subtotal: <span>$170.00</span></h4>
-                    </div>
-                    <div class="cart-checkout-btn">
-                        <a class="btn-hover cart-btn-style" href="cart.php">view cart</a>
-                        <a class="no-mrg btn-hover cart-btn-style" href="checkout.php">checkout</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- mobile header start -->

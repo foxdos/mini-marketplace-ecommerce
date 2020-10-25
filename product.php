@@ -1,9 +1,16 @@
 <?php include 'header.php';
 
 if (isset($_GET["id"])) {
+
+    if (isset($_GET["cart"])) {
+        add_more_cart($_GET["id"]);
+        redirect("product.php?id=".$_GET["id"]);
+    }
+
     $stmt = DBCON()->prepare("SELECT * FROM products INNER JOIN category ON category.id = products.cat WHERE products.id = '".$_GET["id"]."'");
     $stmt->execute();
     $data = $stmt->fetch(PDO::FETCH_ASSOC);
+    
 }
 
 ?>
@@ -55,7 +62,7 @@ if (isset($_GET["id"])) {
                             </div>
                             <div class="pro-details-action-wrap">
                                 <div class="pro-details-add-to-cart">
-                                    <a title="Add to Cart" href="#">Add To Cart </a>
+                                    <a title="Add to Cart" href="product.php?id=<?= $_GET["id"]; ?>&cart=true">Add To Cart </a>
                                 </div>
                                 <!-- <div class="pro-details-action">
                                     <a title="Add to Wishlist" href="#"><i class="icon-heart"></i></a>

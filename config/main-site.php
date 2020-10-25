@@ -248,4 +248,50 @@ function show_shopBysearch($id)
 <?php   }
 }
 
+function fetch_product($id){
+    $stmt = DBCON()->prepare("SELECT * FROM products WHERE id = '".$id."'");
+    $stmt->execute();
+    $data = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $data;
+}
+
+function add_cart($id){
+    $fd = fetch_product($id);
+
+    $data["id"]         = $id; 
+    $data["name"]       = $fd["title"]; 
+    $data["quanity"]    = 1; 
+    $data["price"]      = $fd["sell_price"]; 
+    $data["tprice"]     = $fd["sell_price"];
+
+    // alert($fd["title"]);
+
+    array_push($_SESSION["shop_data"], $data);
+
+}
+
+function add_more_cart($id){
+    // unset();
+
+    $key = null;
+    if (isset($_SESSION["shop_data"])) {
+        $key = array_search($id, array_column($_SESSION["shop_data"], 'id'));
+    }else{
+        $_SESSION["shop_data"] = array();
+    }    
+
+    if ($key) {
+        $_SESSION["shop_data"][$key]["quanity"] = $_SESSION["shop_data"][$key]["quanity"] + 1;
+        $_SESSION["shop_data"][$key]["tprice"] = $_SESSION["shop_data"][$key]["price"] * $_SESSION["shop_data"][$key]["quanity"];
+        alert($key);
+    }else{
+        add_cart($id);
+        alert("Add Items");
+    }
+    
+
+}
+
+
+
 ?>

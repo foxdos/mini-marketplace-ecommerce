@@ -29,7 +29,7 @@ include 'header.php';
                                         <?php
                                         if (isset($_GET["cat"])) {
                                             show_shopBycat($_GET["cat"]);
-                                        }if (isset($_GET["search"])) {
+                                        }else if (isset($_GET["search"])) {
                                             show_shopBysearch($_GET["search"]);
                                         }else{
                                             show_shop();
