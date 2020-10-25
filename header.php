@@ -79,8 +79,8 @@ require_once 'config/init.php';
                                     </div>
                                     <div class="same-style-2 same-style-2-font-inc header-cart">
                                         <a href="cart.php">
-                                            <i class="icon-basket-loaded"></i><span class="pro-count purple">02</span>
-                                            <span class="cart-amount">$2,435.30</span>
+                                            <i class="icon-basket-loaded"></i><span class="pro-count purple"><?= header_show()["item"]; ?></span>
+                                            <span class="cart-amount">৳ <?= header_show()["tprice"]; ?></span>
                                         </a>
                                     </div>
                                 </div>

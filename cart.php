@@ -1,10 +1,14 @@
-<?php include 'header.php'; ?>
+<?php include 'header.php'; 
+if (isset($_POST["shop"])) {
+    update_cart();;
+}
+?>
         <div class="breadcrumb-area bg-gray">
             <div class="container">
                 <div class="breadcrumb-content text-center">
                     <ul>
                         <li>
-                            <a href="index.html">Home</a>
+                            <a href="index.php">Home</a>
                         </li>
                         <li class="active">Cart Page </li>
                     </ul>
@@ -16,7 +20,7 @@
                 <h3 class="cart-page-title">Your cart items</h3>
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                        <form action="cart1.php" method="post">
+                        <form action="cart.php" method="post">
                             <div class="table-content table-responsive cart-table-content">
                                 <table>
                                     <thead>
@@ -30,57 +34,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td class="product-thumbnail">
-                                                <a href="#"><img src="assets/images/cart/cart-1.jpg" alt=""></a>
-                                            </td>
-                                            <input type="hidden" name="shop[1][id]" value="1">
-                                            <td class="product-name"><a href="#">Simple Black T-Shirt</a></td>
-                                            <td class="product-price-cart"><span class="amount">$260.00</span></td>
-                                            <td class="product-quantity pro-details-quality">
-                                                <div class="cart-plus-minus">
-                                                    <input class="cart-plus-minus-box" type="text" name="shop[1][qty]" value="1">
-                                                </div>
-                                            </td>
-                                            <td class="product-subtotal">$110.00</td>
-                                            <td class="product-remove">
-                                                <a href="#"><i class="icon_close"></i></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="product-thumbnail">
-                                                <a href="#"><img src="assets/images/cart/cart-2.jpg" alt=""></a>
-                                            </td>
-                                            <input type="hidden" name="shop[2][id]" value="1">
-                                            <td class="product-name"><a href="#">Norda Simple Backpack</a></td>
-                                            <td class="product-price-cart"><span class="amount">$150.00</span></td>
-                                            <td class="product-quantity pro-details-quality">
-                                                <div class="cart-plus-minus">
-                                                    <input class="cart-plus-minus-box" type="text" name="shop[2][qty]" value="1">
-                                                </div>
-                                            </td>
-                                            <td class="product-subtotal">$150.00</td>
-                                            <td class="product-remove">
-                                                <a href="#"><i class="icon_close"></i></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="product-thumbnail">
-                                                <a href="#"><img src="assets/images/cart/cart-1.jpg" alt=""></a>
-                                            </td>
-                                            <input type="hidden" name="shop[3][id]" value="1">
-                                            <td class="product-name"><a href="#">Simple Black T-Shirt </a></td>
-                                            <td class="product-price-cart"><span class="amount">$170.00</span></td>
-                                            <td class="product-quantity pro-details-quality">
-                                                <div class="cart-plus-minus">
-                                                    <input class="cart-plus-minus-box" type="text" name="shop[3][qty]" value="2">
-                                                </div>
-                                            </td>
-                                            <td class="product-subtotal">$170.00</td>
-                                            <td class="product-remove">
-                                                <a href="#"><i class="icon_close"></i></a>
-                                            </td>
-                                        </tr>
+                                        <?php cart_load(); ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -161,15 +115,15 @@
                                     <div class="title-wrap">
                                         <h4 class="cart-bottom-title section-bg-gary-cart">Cart Total</h4>
                                     </div>
-                                    <h5>Total products <span>$260.00</span></h5>
+                                    <h5>Total products <span>৳ <?= header_show()["tprice"]; ?></span></h5>
                                     <div class="total-shipping">
                                         <h5>Delivery Chrage</h5>
                                         <ul>
-                                            <li> Standard <span>$60.00</span></li>
+                                            <li> Standard <span>৳ 60.00</span></li>
                                         </ul>
                                     </div>
-                                    <h4 class="grand-totall-title">Grand Total <span>$260.00</span></h4>
-                                    <a href="#">Proceed to Checkout</a>
+                                    <h4 class="grand-totall-title">Grand Total <span>৳ <?= header_show()["tprice"]+60; ?></span></h4>
+                                    <a href="checkout.php">Proceed to Checkout</a>
                                 </div>
                             </div>
                         </div>

@@ -38,7 +38,11 @@ include 'config/init.php';
 // $shop[$key]["tprice"] = $shop[$key]["price"] * $shop[$key]["quanity"];
 
 
-var_dump($_POST["shop"]);
+// var_dump($_POST["shop"]);
+// unset($_SESSION["shop_data"]);
+// var_dump($_SESSION["shop_data"]);
+
+update_cart();
 
 
 

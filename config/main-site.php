@@ -259,6 +259,7 @@ function add_cart($id){
     $fd = fetch_product($id);
 
     $data["id"]         = $id; 
+    $data["image"]       = $fd["img"]; 
     $data["name"]       = $fd["title"]; 
     $data["quanity"]    = 1; 
     $data["price"]      = $fd["sell_price"]; 
@@ -271,7 +272,7 @@ function add_cart($id){
 }
 
 function add_more_cart($id){
-    // unset();
+    // unset($_SESSION["shop_data"]);
 
     $key = null;
     if (isset($_SESSION["shop_data"])) {
@@ -280,7 +281,7 @@ function add_more_cart($id){
         $_SESSION["shop_data"] = array();
     }    
 
-    if ($key) {
+    if (is_numeric($key)) {
         $_SESSION["shop_data"][$key]["quanity"] = $_SESSION["shop_data"][$key]["quanity"] + 1;
         $_SESSION["shop_data"][$key]["tprice"] = $_SESSION["shop_data"][$key]["price"] * $_SESSION["shop_data"][$key]["quanity"];
         alert($key);
@@ -292,6 +293,64 @@ function add_more_cart($id){
 
 }
 
+function cart_load(){
 
+    $i = 0;
+    
+    foreach ($_SESSION["shop_data"] as $k) { ?>
+
+        <tr>
+            <td class="product-thumbnail">
+                <a href="#"><img height="112" width="92" src="assets/products/<?= $k["image"] ?>" alt=""></a>
+            </td>
+            <input type="hidden" name="shop[<?= $i; ?>][id]" value="<?= $k["id"] ?>">
+            <td class="product-name"><a href="#"><?= $k["name"] ?></a></td>
+            <td class="product-price-cart"><span class="amount">৳ <?= $k["price"] ?></span></td>
+            <td class="product-quantity pro-details-quality">
+                <div class="cart-plus-minus">
+                    <input class="cart-plus-minus-box" type="text" name="shop[<?= $i; ?>][qty]" value="<?= $k["quanity"] ?>">
+                </div>
+            </td>
+            <td class="product-subtotal">৳ <?= $k["tprice"] ?></td>
+            <td class="product-remove">
+                <a href="#"><i class="icon_close"></i></a>
+            </td>
+        </tr>
+
+<?php    
+    $i++;
+    }
+}
+
+function header_show()
+{
+    $result['item'] = 0;
+    $result['tprice'] = 0;
+    if (isset($_SESSION["shop_data"])) {
+        $result['item'] = count($_SESSION["shop_data"]);
+        $result['tprice'] = array_sum(array_column($_SESSION["shop_data"], 'tprice'));
+    }
+
+    return $result;
+}
+
+function update_cart(){
+
+    $data = $_SESSION["shop_data"];
+    $ucart = $_POST["shop"];
+    $i = 0;
+
+    foreach ($ucart as $k) {
+        $key = array_search($k["id"], array_column($_SESSION["shop_data"], 'id'));
+        if ($_SESSION["shop_data"][$key]["quanity"] != $_POST["shop"][$i]["qty"]) { 
+
+            $_SESSION["shop_data"][$key]["quanity"] = $_POST["shop"][$i]["qty"];
+            $_SESSION["shop_data"][$key]["tprice"] = $_SESSION["shop_data"][$key]["price"] * $_SESSION["shop_data"][$key]["quanity"];
+        }
+
+        $i++;
+    }
+
+}
 
 ?>
