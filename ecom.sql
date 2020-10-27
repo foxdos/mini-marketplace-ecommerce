@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Oct 27, 2020 at 05:29 AM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.2.31
+-- Host: 127.0.0.1:3306
+-- Generation Time: Oct 27, 2020 at 01:51 PM
+-- Server version: 5.7.24
+-- PHP Version: 7.1.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -27,12 +28,14 @@ SET time_zone = "+00:00";
 -- Table structure for table `category`
 --
 
-CREATE TABLE `category` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `category`;
+CREATE TABLE IF NOT EXISTS `category` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `cat_name` varchar(255) DEFAULT NULL,
-  `cat_image` text DEFAULT NULL,
-  `sts` int(3) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `cat_image` text,
+  `sts` int(3) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `category`
@@ -48,14 +51,22 @@ INSERT INTO `category` (`id`, `cat_name`, `cat_image`, `sts`) VALUES
 -- Table structure for table `oders`
 --
 
-CREATE TABLE `oders` (
-  `id` int(11) NOT NULL,
-  `pid` int(11) NOT NULL,
-  `quamity` int(11) NOT NULL,
-  `sub_total` int(11) NOT NULL,
-  `final_total` int(11) NOT NULL,
-  `cid` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+DROP TABLE IF EXISTS `oders`;
+CREATE TABLE IF NOT EXISTS `oders` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `cid` varchar(255) NOT NULL,
+  `orders` text,
+  `note` text,
+  `sts` int(3) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `oders`
+--
+
+INSERT INTO `oders` (`id`, `cid`, `orders`, `note`, `sts`) VALUES
+(1, 'skb@mail.com', '[{\"id\":\"3\",\"image\":\"WD011\",\"name\":\"Selowar Kamiz\",\"quanity\":2,\"price\":\"320\",\"tprice\":640},{\"id\":\"4\",\"image\":\"MD001\",\"name\":\"Employee Dress\",\"quanity\":1,\"price\":\"400\",\"tprice\":\"400\"}]', 'sadsadas ', 1);
 
 -- --------------------------------------------------------
 
@@ -63,18 +74,20 @@ CREATE TABLE `oders` (
 -- Table structure for table `products`
 --
 
-CREATE TABLE `products` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `products`;
+CREATE TABLE IF NOT EXISTS `products` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) DEFAULT NULL,
-  `description` text DEFAULT NULL,
+  `description` text,
   `sell_price` int(11) NOT NULL,
   `unit_price` int(11) NOT NULL,
   `cat` int(3) NOT NULL,
   `prod_code` varchar(150) DEFAULT NULL,
-  `sts` int(3) NOT NULL DEFAULT 0,
+  `sts` int(3) NOT NULL DEFAULT '0',
   `uid` int(11) DEFAULT NULL,
-  `img` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `img` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `products`
@@ -91,17 +104,19 @@ INSERT INTO `products` (`id`, `title`, `description`, `sell_price`, `unit_price`
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `fname` varchar(255) DEFAULT NULL,
   `lname` varchar(255) DEFAULT NULL,
   `email` varchar(225) NOT NULL,
   `password` varchar(255) NOT NULL,
   `mobile` varchar(11) DEFAULT NULL,
-  `role` int(3) NOT NULL DEFAULT 0,
-  `address` text DEFAULT NULL,
-  `sts` int(3) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `role` int(3) NOT NULL DEFAULT '0',
+  `address` text,
+  `sts` int(3) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
@@ -118,13 +133,15 @@ INSERT INTO `users` (`id`, `fname`, `lname`, `email`, `password`, `mobile`, `rol
 -- Table structure for table `vendors`
 --
 
-CREATE TABLE `vendors` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `vendors`;
+CREATE TABLE IF NOT EXISTS `vendors` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `shop_name` varchar(255) NOT NULL,
-  `shop_address` text DEFAULT NULL,
+  `shop_address` text,
   `uid` int(11) NOT NULL,
-  `sts` int(3) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `sts` int(3) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `vendors`
@@ -132,74 +149,6 @@ CREATE TABLE `vendors` (
 
 INSERT INTO `vendors` (`id`, `shop_name`, `shop_address`, `uid`, `sts`) VALUES
 (1, 'maxprofit', 'Mirput', 3, 1);
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `category`
---
-ALTER TABLE `category`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `oders`
---
-ALTER TABLE `oders`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `products`
---
-ALTER TABLE `products`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `vendors`
---
-ALTER TABLE `vendors`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `category`
---
-ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `oders`
---
-ALTER TABLE `oders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `products`
---
-ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `vendors`
---
-ALTER TABLE `vendors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
