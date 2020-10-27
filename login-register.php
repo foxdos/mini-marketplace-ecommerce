@@ -4,7 +4,7 @@ include 'header.php';
 $DB=DBCON();
 
 if (isset($_SESSION['islogg']) && $_SESSION['islogg'] != false) {
-    redirect('index.php');
+    redirect('my-account.php');
 }
 
 if (isset($_POST['login'])) {
@@ -18,7 +18,12 @@ if (isset($_POST['login'])) {
         $_SESSION['email'] = $email;
         $_SESSION['islogg'] = true;
         alert("Login Successfully");
-        redirect('index.php');
+        if (isset($_GET["preurl"])) {
+            redirect($_GET["preurl"]);
+        }else{
+            redirect('my-account.php');
+        }
+        
     }else{
         alert("Login Unsuccessfully");
     }
@@ -37,7 +42,7 @@ if (isset($_POST['register'])) {
     );
     if($result) {
         alert("Account Successfully");
-        redirect("index.php");
+        redirect("my-account.php");
     }
 
 }
@@ -105,33 +110,6 @@ if (isset($_POST['register'])) {
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="subscribe-area bg-gray pt-115 pb-115">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-5 col-md-5">
-                        <div class="section-title">
-                            <h2>keep connected</h2>
-                            <p>Get updates by subscribe our weekly newsletter</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-7 col-md-7">
-                        <div id="mc_embed_signup" class="subscribe-form">
-                            <form id="mc-embedded-subscribe-form" class="validate subscribe-form-style"   method="post" action="">
-                                <div id="mc_embed_signup_scroll" class="mc-form">
-                                    <input class="email" type="email" required="" placeholder="Enter your email address" name="EMAIL" value="">
-                                    <div class="mc-news" aria-hidden="true">
-                                        <input type="text" value="" tabindex="-1" name="">
-                                    </div>
-                                    <div class="clear">
-                                        <input id="mc-embedded-subscribe" class="button" type="submit" name="subscribe" value="Subscribe">
-                                    </div>
-                                </div>
-                            </form>
                         </div>
                     </div>
                 </div>

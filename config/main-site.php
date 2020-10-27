@@ -37,9 +37,6 @@ function new_product()
                         <span class="new-price">৳ <?= $k["sell_price"]; ?> </span>
                         <span class="old-price">৳ <?= $k["unit_price"]; ?></span>
                     </div>
-                    <div class="pro-add-to-cart-2">
-                        <button title="Add to Cart">Add To Cart</button>
-                    </div>
                 </div>
             </div>
         </div>
@@ -93,9 +90,6 @@ function show_shop()
                     <div class="product-price-2">
                         <span>৳ <?= $k["sell_price"]; ?></span>
                     </div>
-                    <div class="pro-add-to-cart">
-                        <button title="Add to Cart">Add To Cart</button>
-                    </div>
                 </div>
             </div>
         </div>
@@ -145,9 +139,6 @@ function show_category_base_product()
                                                 <h3><a href="product.php?id=<?= $p["id"]; ?>"><?= $p["title"]; ?></a></h3>
                                                 <div class="product-price-2">
                                                     <span>৳ <?= $p["sell_price"]; ?></span>
-                                                </div>
-                                                <div class="pro-add-to-cart">
-                                                    <button title="Add to Cart">Add To Cart</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -201,9 +192,6 @@ function show_shopBycat($id)
                     <h3><a href="product.php?id=<?= $k["id"]; ?>"><?= $k["title"]; ?></a></h3>
                     <div class="product-price-2">
                         <span>৳ <?= $k["sell_price"]; ?></span>
-                    </div>
-                    <div class="pro-add-to-cart">
-                        <button title="Add to Cart">Add To Cart</button>
                     </div>
                 </div>
             </div>
@@ -296,12 +284,15 @@ function add_more_cart($id){
 function cart_load(){
 
     $i = 0;
+    if (!isset($_SESSION["shop_data"])) {
+        $_SESSION["shop_data"] = array();
+    }
     
     foreach ($_SESSION["shop_data"] as $k) { ?>
 
         <tr>
             <td class="product-thumbnail">
-                <a href="#"><img height="112" width="92" src="assets/products/<?= $k["image"] ?>" alt=""></a>
+                <a href="#"><img height="112" width="92" src="assets/products/<?= $k["image"] ?>.png" alt=""></a>
             </td>
             <input type="hidden" name="shop[<?= $i; ?>][id]" value="<?= $k["id"] ?>">
             <td class="product-name"><a href="#"><?= $k["name"] ?></a></td>
@@ -349,6 +340,17 @@ function update_cart(){
         }
 
         $i++;
+    }
+
+}
+
+function checkout_list(){
+
+    $data = $_SESSION["shop_data"];
+
+    foreach ($data as $k) { ?>
+        <li><?= $k["name"]; ?> X <?= $k["quanity"]; ?> <span>৳<?= $k["tprice"]; ?> </span></li>
+    <?php
     }
 
 }
