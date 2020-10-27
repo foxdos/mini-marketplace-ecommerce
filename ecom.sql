@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 27, 2020 at 01:51 PM
+-- Generation Time: Oct 27, 2020 at 02:00 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.1.26
 
@@ -124,7 +124,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`id`, `fname`, `lname`, `email`, `password`, `mobile`, `role`, `address`, `sts`) VALUES
 (1, 'Abdulah', 'Akib', 'skb@mail.com', '202cb962ac59075b964b07152d234b70', '01781545752', 0, '{\r\n  \"street_address\":\"Tejkunipara\",\r\n  \"flatNumber\":\"4-A\",\r\n  \"town\":\"Dhaka\",\r\n  \"zip\":\"1216\"\r\n}', 1),
-(2, 'Shakib', 'Nabi', 'skbdevbd@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', NULL, 1, NULL, 0),
+(2, 'Shakib', 'Nabi', 'abc@gmail.com', '202cb962ac59075b964b07152d234b70', NULL, 1, NULL, 0),
 (3, 'Faisal', 'Nabi', 'admin@maxprofit.me', '202cb962ac59075b964b07152d234b70', '01781545752', 2, '{\r\n  \"street_address\":\"Tejkunipara\",\r\n  \"flatNumber\":\"4-A\",\r\n  \"town\":\"Dhaka\",\r\n  \"zip\":\"1216\"\r\n}', 0);
 
 -- --------------------------------------------------------
