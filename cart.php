@@ -2,6 +2,9 @@
 if (isset($_POST["shop"])) {
     update_cart();;
 }
+if (isset($_GET["clear"])) {
+    $_SESSION["shop_data"] = array();
+}
 ?>
         <div class="breadcrumb-area bg-gray">
             <div class="container">
@@ -42,11 +45,11 @@ if (isset($_POST["shop"])) {
                                 <div class="col-lg-12">
                                     <div class="cart-shiping-update-wrapper">
                                         <div class="cart-shiping-update">
-                                            <a href="#">Continue Shopping</a>
+                                            <a href="shop.php">Continue Shopping</a>
                                         </div>
                                         <div class="cart-clear">
                                             <button>Update Cart</button>
-                                            <a href="#">Clear Cart</a>
+                                            <a href="cart.php?clear=true">Clear Cart</a>
                                         </div>
                                     </div>
                                 </div>

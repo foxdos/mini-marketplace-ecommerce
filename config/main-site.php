@@ -272,10 +272,10 @@ function add_more_cart($id){
     if (is_numeric($key)) {
         $_SESSION["shop_data"][$key]["quanity"] = $_SESSION["shop_data"][$key]["quanity"] + 1;
         $_SESSION["shop_data"][$key]["tprice"] = $_SESSION["shop_data"][$key]["price"] * $_SESSION["shop_data"][$key]["quanity"];
-        alert($key);
+        // alert($key);
     }else{
         add_cart($id);
-        alert("Add Items");
+        // alert("Add Items");
     }
     
 
@@ -355,4 +355,22 @@ function checkout_list(){
 
 }
 
+function order_place($note){
+
+    $data = $_SESSION["shop_data"];
+    $stmt = DBCON()->prepare("INSERT INTO oders(cid, orders, note) VALUES (:cid, :orders, :note)");
+    $res = $stmt->execute(array(
+        ':cid'      => $_SESSION['email'],
+        ':orders'   => json_encode($data),
+        ':note'     => $note
+    ));
+    if (!empty($res)) {
+       alert("Order Place Successfully");
+       unset($_SESSION["shop_data"]);
+       redirect("shop.php");
+    }else{
+        alert("Technical issue");
+    }
+
+}
 ?>

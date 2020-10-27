@@ -206,7 +206,7 @@ if (isset($_POST['login'])) {
                     </div>
                 </div>
             </div>
-            <a href="index.html" class="btn btn-primary back-btn"><i data-feather="arrow-left"></i>back</a>
+            <a href="../index.php" class="btn btn-primary back-btn"><i data-feather="arrow-left"></i>back</a>
         </div>
     </div>
 </div>

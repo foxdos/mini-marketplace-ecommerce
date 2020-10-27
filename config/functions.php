@@ -280,4 +280,62 @@ function seller_product()
 <?php	}
 }
 
+function order_list(){
+	$stmt = DBCON()->prepare("SELECT * FROM `oders`");
+	$stmt->execute();
+	$data = $stmt->fetchAll();
+	foreach ($data as $k) {
+		$gtotal = array_sum(array_column(json_decode($k["orders"],true), 'tprice')) + 60;
+		$sellIncome = (array_sum(array_column(json_decode($k["orders"],true), 'tprice')) * 80)/100;
+		$companyIncome = (array_sum(array_column(json_decode($k["orders"],true), 'tprice')) * 20)/100;
+		$companyIncome += 60;
+		echo '<tr>
+				<td>'.$k["id"].'</td>
+				<td>'.$k["cid"].'</td>
+				<td>'.count(json_decode($k["orders"],true)).'</td>
+				<td>'.$gtotal.'</td>
+				<td>'.$sellIncome.'</td>
+				<td>'.$companyIncome.'</td>
+				<td>
+					<a href="order-view.php?id='.$k["id"].'" class="btn btn-xs btn-success">view</a>
+					<a href="order.php?process='.$k["id"].'" class="btn btn-xs btn-info">Process</a>
+					<a href="order.php?can='.$k["id"].'" class="btn btn-xs btn-danger">Cancel</a>
+				</td>
+			</tr>';
+		
+	}
+}
+
+function show_seller_admin($id){
+
+	$pro_stmt = DBCON()->prepare("SELECT * FROM products WHERE id = '".$id."'");
+    $pro_stmt->execute();
+    $pro_data = $pro_stmt->fetch(PDO::FETCH_ASSOC);
+
+    $ven_stmt = DBCON()->prepare("SELECT * FROM vendors WHERE uid = '".$pro_data["uid"]."'");
+    $ven_stmt->execute();
+    $ven_data = $ven_stmt->fetch(PDO::FETCH_ASSOC);
+
+    return $ven_data["shop_name"];
+}
+
+function order_list_seller(){
+	$stmt = DBCON()->prepare("SELECT * FROM `oders`");
+	$stmt->execute();
+	$data = $stmt->fetchAll();
+	foreach ($data as $k) {
+		$sellIncome = (array_sum(array_column(json_decode($k["orders"],true), 'tprice')) * 80)/100;
+		echo '<tr>
+				<td>'.$k["id"].'</td>
+				<td>'.count(json_decode($k["orders"],true)).'</td>
+				<td>'.$sellIncome.'</td>
+				<td>
+					<a href="order-view.php?id='.$k["id"].'" class="btn btn-xs btn-success">view</a>
+					<a href="order.php?send='.$k["id"].'" class="btn btn-xs btn-info">Sent to HUB</a>
+					<a href="order.php?can='.$k["id"].'" class="btn btn-xs btn-danger">Cancel</a>
+				</td>
+			</tr>';
+		
+	}
+}
 ?>
